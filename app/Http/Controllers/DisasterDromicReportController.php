@@ -172,6 +172,79 @@ class DisasterDromicReportController extends Controller
             ]);
         }
 
+        $existing_data_sadd = DB::table('tbl_sex_age_sector_data')
+        ->where('disaster_report_uuid', $existing_uuid)
+        ->get();
+
+        foreach ($existing_data_sadd as $data) {
+            DB::table('tbl_sex_age_sector_data')->insert([
+                'uuid'                      => \Str::uuid(),
+                'province_psgc_code'        => $data->province_psgc_code,
+                'municipality_psgc_code'    => $data->municipality_psgc_code,
+                'disaster_report_uuid'      => $new_uuid,
+
+                'infant_male_cum'           => $data->infant_male_cum,
+                'infant_male_now'           => $data->infant_male_now,
+                'infant_female_cum'         => $data->infant_female_cum,
+                'infant_female_now'         => $data->infant_female_now,
+                'toddlers_male_cum'         => $data->toddlers_male_cum,
+                'toddlers_male_now'         => $data->toddlers_male_now,
+                'toddlers_female_cum'       => $data->toddlers_female_cum,
+                'toddlers_female_now'       => $data->toddlers_female_now,
+                'school_age_male_cum'       => $data->school_age_male_cum,
+                'school_age_male_now'       => $data->school_age_male_now,
+                'school_age_female_cum'     => $data->school_age_female_cum,
+                'school_age_female_now'     => $data->school_age_female_now,
+                'teenage_male_cum'          => $data->teenage_male_cum,
+                'teenage_male_now'          => $data->teenage_male_now,
+                'teenage_female_cum'        => $data->teenage_female_cum,
+                'teenage_female_now'        => $data->teenage_female_now,
+                'adult_male_cum'            => $data->adult_male_cum,
+                'adult_male_now'            => $data->adult_male_now,
+                'adult_female_cum'          => $data->adult_female_cum,
+                'adult_female_now'          => $data->adult_female_now,
+                'elderly_male_cum'          => $data->elderly_male_cum,
+                'elderly_male_now'          => $data->elderly_male_now,
+                'elderly_female_cum'        => $data->elderly_female_cum,
+                'elderly_female_now'        => $data->elderly_female_now,
+                'pregnant_cum'              => $data->pregnant_cum,
+                'pregnant_now'              => $data->pregnant_now,
+                'lactating_cum'             => $data->lactating_cum,
+                'lactating_now'             => $data->lactating_now,
+                'child_headed_male_cum'     => $data->child_headed_male_cum,
+                'child_headed_male_now'     => $data->child_headed_male_now,
+                'child_headed_female_cum'   => $data->child_headed_female_cum,
+                'child_headed_female_now'   => $data->child_headed_female_now,
+                'single_headed_male_cum'    => $data->single_headed_male_cum,
+                'single_headed_male_now'    => $data->single_headed_male_now,
+                'single_headed_female_cum'  => $data->single_headed_female_cum,
+                'single_headed_female_now'  => $data->single_headed_female_now,
+                'solo_parent_male_cum'      => $data->solo_parent_male_cum,
+                'solo_parent_male_now'      => $data->solo_parent_male_now,
+                'solo_parent_female_cum'    => $data->solo_parent_female_cum,
+                'solo_parent_female_now'    => $data->solo_parent_female_now,
+                'pwd_male_cum'              => $data->pwd_male_cum,
+                'pwd_male_now'              => $data->pwd_male_now,
+                'pwd_female_cum'            => $data->pwd_female_cum,
+                'pwd_female_now'            => $data->pwd_female_now,
+                'ip_male_cum'               => $data->ip_male_cum,
+                'ip_male_now'               => $data->ip_male_now,
+                'ip_female_cum'             => $data->ip_female_cum,
+                'ip_female_now'             => $data->ip_female_now,
+                'fourps_male_cum'           => $data->fourps_male_cum,
+                'fourps_male_now'           => $data->fourps_male_now,
+                'fourps_female_cum'         => $data->fourps_female_cum,
+                'fourps_female_now'         => $data->fourps_female_now,
+                'preschoolers_male_cum'     => $data->preschoolers_male_cum,
+                'preschoolers_male_now'     => $data->preschoolers_male_now,
+                'preschoolers_female_cum'   => $data->preschoolers_female_cum,
+                'preschoolers_female_now'   => $data->preschoolers_female_now,
+
+                'created_at'                => $data->created_at,
+                'updated_at'                => now()
+            ]);
+        }
+
         // Step 4: Return a success response
         return response()->json([
             'message' => 'All data successfully saved to new disaster report.'

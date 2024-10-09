@@ -113,6 +113,8 @@ Route::post('/get_dashboard_data', [DashboardController::class, 'getDashboardDat
 //SexAgeSectorDataController
 Route::post('/save_sex_age_sector_data', [SexAgeSectorDataController::class, 'store']);
 Route::get('/getAllSADData/{disaster_report_uuid}', [SexAgeSectorDataController::class, 'getAllSADData']);
+Route::put('/update_sex_age_sector_data/{uuid}', [SexAgeSectorDataController::class, 'update']);
+Route::delete('/delete_sex_age_sector_data/{uuid}', [SexAgeSectorDataController::class, 'destroy']);
 
 Route::post('/apitoken', [AuthUserController::class, 'apitoken']);
 
