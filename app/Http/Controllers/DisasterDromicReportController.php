@@ -92,23 +92,24 @@ class DisasterDromicReportController extends Controller
 
         foreach ($existing_data_inside_ec as $data) {
             DB::table('tbl_inside_ec')->insert([
-                'uuid'                      => \Str::uuid(),
-                'province_psgc_code'        => $data->province_psgc_code,
-                'municipality_psgc_code'    => $data->municipality_psgc_code,
-                'brgy_located_ec_psgc_code' => $data->brgy_located_ec_psgc_code,
-                'ec_uuid'                   => $data->ec_uuid,
-                'ec_cum'                    => $data->ec_cum,
-                'ec_now'                    => $data->ec_now,
-                'families_cum'              => $data->families_cum,
-                'families_now'              => $data->families_now,
-                'persons_cum'               => $data->persons_cum,
-                'persons_now'               => $data->persons_now,
-                'brgy_origin_psgc_codes'    => $data->brgy_origin_psgc_codes,
-                'ec_status'                 => $data->ec_status,
-                'ec_remarks'                => $data->ec_remarks,
-                'disaster_report_uuid'      => $new_uuid,
-                'created_at'                => $data->created_at,
-                'updated_at'                => now()
+                'uuid'                                  => \Str::uuid(),
+                'province_psgc_code'                    => $data->province_psgc_code,
+                'municipality_psgc_code'                => $data->municipality_psgc_code,
+                'municipality_located_ec_psgc_code'     => $data->municipality_located_ec_psgc_code,
+                'brgy_located_ec_psgc_code'             => $data->brgy_located_ec_psgc_code,
+                'ec_uuid'                               => $data->ec_uuid,
+                'ec_cum'                                => $data->ec_cum,
+                'ec_now'                                => $data->ec_now,
+                'families_cum'                          => $data->families_cum,
+                'families_now'                          => $data->families_now,
+                'persons_cum'                           => $data->persons_cum,
+                'persons_now'                           => $data->persons_now,
+                'brgy_origin_psgc_codes'                => $data->brgy_origin_psgc_codes,
+                'ec_status'                             => $data->ec_status,
+                'ec_remarks'                            => $data->ec_remarks,
+                'disaster_report_uuid'                  => $new_uuid,
+                'created_at'                            => $data->created_at,
+                'updated_at'                            => now()
             ]);
         }
 
