@@ -21,27 +21,29 @@ class InsideEcController extends Controller
                     $query->where('disaster_report_uuid', $request->disaster_report_uuid);
                 })
             ],
-            'brgy_located_ec_psgc_code' => 'required',
-            'ec_uuid'                   => 'required',
-            'ec_cum'                    => 'required|integer|min:0|max:1',
-            'ec_now'                    => 'required|integer|min:0|max:1',
-            'families_cum'              => 'required|integer|min:0',
-            'families_now'              => 'required|integer|min:0',
-            'persons_cum'               => 'required|integer|min:0',
-            'persons_now'               => 'required|integer|min:0',
-            'brgy_origin_psgc_codes'    => 'required',
-            'disaster_report_uuid'      => 'required|uuid',
+            'municipality_located_ec_psgc_code' => 'required',
+            'brgy_located_ec_psgc_code'         => 'required',
+            'ec_uuid'                           => 'required',
+            'ec_cum'                            => 'required|integer|min:0|max:1',
+            'ec_now'                            => 'required|integer|min:0|max:1',
+            'families_cum'                      => 'required|integer|min:0',
+            'families_now'                      => 'required|integer|min:0',
+            'persons_cum'                       => 'required|integer|min:0',
+            'persons_now'                       => 'required|integer|min:0',
+            'brgy_origin_psgc_codes'            => 'required',
+            'disaster_report_uuid'              => 'required|uuid',
         ],[
-            'province_psgc_code.required'        => 'Province is required',
-            'municipality_psgc_code.required'    => 'Municipality is required',
-            'municipality_psgc_code.exists'      => 'There are no reports on affected in this city/municipality for the given disaster report.',
-            'brgy_located_ec_psgc_code.required' => 'Barangay located (EC) is required',
-            'families_cum.required'              => 'Affected families cum field is required',
-            'families_now.required'              => 'Affected families now field is required',
-            'persons_cum.required'               => 'Affected persons cum field is required',
-            'persons_now.required'               => 'Affected persons now field is required',
-            'brgy_origin_psgc_codes.required'    => 'IDP origin is required',
-            'ec_uuid.required'                   => 'Evacuation center is required'
+            'province_psgc_code.required'                   => 'Province is required',
+            'municipality_psgc_code.required'               => 'Municipality is required',
+            'municipality_located_ec_psgc_code.required'    => 'Municipal location of EC is required',
+            'municipality_psgc_code.exists'                 => 'There are no reports on affected in this city/municipality for the given disaster report.',
+            'brgy_located_ec_psgc_code.required'            => 'Barangay located (EC) is required',
+            'families_cum.required'                         => 'Affected families cum field is required',
+            'families_now.required'                         => 'Affected families now field is required',
+            'persons_cum.required'                          => 'Affected persons cum field is required',
+            'persons_now.required'                          => 'Affected persons now field is required',
+            'brgy_origin_psgc_codes.required'               => 'IDP origin is required',
+            'ec_uuid.required'                              => 'Evacuation center is required'
         ]);
 
         $validator->after(function ($validator) use ($request) {
@@ -72,21 +74,22 @@ class InsideEcController extends Controller
 
         // Store the data
         $insideEc = InsideEc::create([
-            'uuid'                       => Str::uuid(), // Generate a new UUID
-            'province_psgc_code'         => $request->province_psgc_code,
-            'municipality_psgc_code'     => $request->municipality_psgc_code,
-            'brgy_located_ec_psgc_code'  => $request->brgy_located_ec_psgc_code,
-            'ec_uuid'                    => $request->ec_uuid,
-            'ec_cum'                     => $request->ec_cum ?? 0,
-            'ec_now'                     => $request->ec_now ?? 0,
-            'families_cum'               => $request->families_cum ?? 0,
-            'families_now'               => $request->families_now ?? 0,
-            'persons_cum'                => $request->persons_cum ?? 0,
-            'persons_now'                => $request->persons_now ?? 0,
-            'brgy_origin_psgc_codes'     => $request->brgy_origin_psgc_codes ?? '',
-            'ec_status'                  => $request->ec_status ?? '',
-            'ec_remarks'                 => $request->ec_remarks ?? '',
-            'disaster_report_uuid'       => $request->disaster_report_uuid
+            'uuid'                                  => Str::uuid(), // Generate a new UUID
+            'province_psgc_code'                    => $request->province_psgc_code,
+            'municipality_psgc_code'                => $request->municipality_psgc_code,
+            'municipality_located_ec_psgc_code'     => $request->municipality_located_ec_psgc_code,
+            'brgy_located_ec_psgc_code'             => $request->brgy_located_ec_psgc_code,
+            'ec_uuid'                               => $request->ec_uuid,
+            'ec_cum'                                => $request->ec_cum ?? 0,
+            'ec_now'                                => $request->ec_now ?? 0,
+            'families_cum'                          => $request->families_cum ?? 0,
+            'families_now'                          => $request->families_now ?? 0,
+            'persons_cum'                           => $request->persons_cum ?? 0,
+            'persons_now'                           => $request->persons_now ?? 0,
+            'brgy_origin_psgc_codes'                => $request->brgy_origin_psgc_codes ?? '',
+            'ec_status'                             => $request->ec_status ?? '',
+            'ec_remarks'                            => $request->ec_remarks ?? '',
+            'disaster_report_uuid'                  => $request->disaster_report_uuid
         ]);
 
         // Return success response
@@ -184,6 +187,7 @@ class InsideEcController extends Controller
                             t1.uuid,
                             t1.province_psgc_code,
                             t1.municipality_psgc_code,
+                            t1.municipality_located_ec_psgc_code,
                             t1.brgy_located_ec_psgc_code,
                             t3.name,
                             t1.ec_uuid,

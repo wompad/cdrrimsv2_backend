@@ -23,6 +23,7 @@ class InsideEc extends Model
         'uuid',
         'province_psgc_code',
         'municipality_psgc_code',
+        'municipality_located_ec_psgc_code',
         'brgy_located_ec_psgc_code',
         'ec_uuid',
         'ec_cum',
